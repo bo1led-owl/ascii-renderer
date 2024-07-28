@@ -20,7 +20,7 @@ static const char characters[] =
     // "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`"
     // "abcdefghijklmnopqrstuvwxyz{|}~";
     "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/"
-    "\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+    "\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 
 enum {
     CHAR_COUNT = sizeof(characters),
