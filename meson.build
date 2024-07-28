@@ -16,7 +16,7 @@ src = [
    'dep/stb_image.c',
 ]
 executable(
-  'main',
+  'ascii',
   src,
   include_directories: [incdir],
   dependencies: [m_dep],
