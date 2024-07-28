@@ -2,8 +2,8 @@
 
 #include <stdio.h>
 
-#define COLOR_BOLD "\xB[1m"
-#define COLOR_RESET "\xB[m"
+#define COLOR_BOLD "\x1B[1m"
+#define COLOR_RESET "\x1B[0m"
 
 CliResult check_arguments(int argc, const char** argv) {
     if (argc < 2) {
