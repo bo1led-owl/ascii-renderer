@@ -5,16 +5,6 @@
 #define COLOR_BOLD "\x1B[1m"
 #define COLOR_RESET "\x1B[0m"
 
-CliResult check_arguments(int argc, const char** argv) {
-    if (argc < 2) {
-        return (CliResult){.status = Cli_TooFew};
-    } else if (argc > 2) {
-        return (CliResult){.status = Cli_TooMany};
-    } else {
-        return (CliResult){.status = Cli_Ok, .filename = argv[1]};
-    }
-}
-
 void print_bold(const char* str) {
     printf("%s%s%s", COLOR_BOLD, str, COLOR_RESET);
 }

@@ -9,5 +9,5 @@ typedef struct {
 } Image;
 
 void render_grayscale(Image image);
-void render_rgb(Image image);
-void render_rgba(Image image);
+void render_rgb(Image image, bool grayscale);
+void render_rgba(Image image, bool grayscale);

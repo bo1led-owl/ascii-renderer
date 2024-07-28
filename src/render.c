@@ -123,7 +123,7 @@ void render_grayscale(Image image) {
     }
 }
 
-void render_rgb(Image image) {
+void render_rgb(Image image, bool grayscale) {
     const int pixels_per_char = get_pixels_per_char(image.width, image.height);
 
     for (int i = 0; i + pixels_per_char < image.height; i += pixels_per_char) {
@@ -133,17 +133,21 @@ void render_rgb(Image image) {
             const double luminance =
                 (pixel.r / 256.0 + pixel.b / 256.0 + pixel.g / 256.0) / 3.0;
 
-            color_output_fg(pixel.r, pixel.g, pixel.b);
+            if (!grayscale) {
+                color_output_fg(pixel.r, pixel.g, pixel.b);
+            }
             putchar(get_char_by_luminance(luminance));
         }
-        reset_color();
+        if (!grayscale) {
+            reset_color();
+        }
         putchar('\n');
     }
 
     reset_color();
 }
 
-void render_rgba(Image image) {
+void render_rgba(Image image, bool grayscale) {
     const int pixels_per_char = get_pixels_per_char(image.width, image.height);
 
     for (int i = 0; i + pixels_per_char < image.height; i += pixels_per_char) {
@@ -154,10 +158,14 @@ void render_rgba(Image image) {
                 (pixel.r / 256.0 + pixel.b / 256.0 + pixel.g / 256.0) / 3.0 *
                 (pixel.a / 256.0);
 
-            color_output_fg(pixel.r, pixel.g, pixel.b);
+            if (!grayscale) {
+                color_output_fg(pixel.r, pixel.g, pixel.b);
+            }
             putchar(get_char_by_luminance(luminance));
         }
-        reset_color();
+        if (!grayscale) {
+            reset_color();
+        }
         putchar('\n');
     }
 
