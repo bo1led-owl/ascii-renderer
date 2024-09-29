@@ -16,7 +16,7 @@ src = [
    'dep/stb_image.c',
 ]
 executable(
-  'ascii',
+  meson.project_name(),
   src,
   include_directories: [incdir],
   dependencies: [m_dep],
