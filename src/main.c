@@ -92,7 +92,7 @@ int main(const int argc, const char** argv) {
     image.data =
         stbi_load_from_file(file, &image.width, &image.height, &channels, 0);
     if (!image.data) {
-        fprintf(stderr, "Could not load the image: %s:", stbi_failure_reason());
+        fprintf(stderr, "Could not load the image: %s\n", stbi_failure_reason());
         exit(2);
     }
 
