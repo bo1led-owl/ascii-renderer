@@ -1,5 +1,5 @@
 project('ascii_renderer', 'c', default_options : [
-  'c_std=c23',
+  'c_std=c99',
   'warning_level=3',
 ])
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <dep/stb_image.h>
+#include <stdbool.h>
 
 typedef struct {
     stbi_uc* data;

@@ -1,5 +1,5 @@
 #include <assert.h>
-#include <stb_image.h>
+#include <dep/stb_image.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -18,20 +18,20 @@ typedef struct {
     bool grayscale;
 } Args;
 
-static void print_help() {
+static void print_help(void) {
     print_bold("Usage");
-    printf(": " STR(PROJECT_NAME) " <IMAGE>");
-    printf("\n\n");
+    puts(": " STR(PROJECT_NAME) " <IMAGE>");
+    puts("");
 
     print_bold("Arguments");
-    printf(":\n");
-    printf("\tIMAGE: path to the image to be rendered in ascii");
-    printf("\n\n");
+    puts(":");
+    puts("  IMAGE: path to the image to be rendered in ascii");
+    puts("");
 
     print_bold("Flags");
-    printf(":\n");
-    printf("\t--help: see this message\n");
-    printf("\t-g, --grayscale: render image in grayscale\n");
+    puts(":");
+    puts("  --help: see this message");
+    puts("  -g, --grayscale: render image in grayscale");
 }
 
 static bool is_flag(const char* s) {
@@ -47,38 +47,39 @@ static bool is_flag(const char* s) {
     return dash_count > 0;
 }
 
-static void handle_flag(const char* s, Args* args) {
+static Args handle_flag(const char* s, Args args) {
     if (strcmp(s, "--help") == 0) {
         print_help();
         exit(0);
     } else if (strcmp(s, "-g") == 0 || strcmp(s, "--grayscale") == 0) {
-        args->grayscale = true;
+        args.grayscale = true;
     } else {
         fprintf(stderr, "Unknown flag, use --help to see the guide\n");
         exit(2);
     }
+    return args;
 }
 
 static Args handle_cli(int argc, const char** argv) {
-    Args args = {0};
-    size_t arg_count = 0;
+    Args args = (Args){0};
     for (int i = 1; i < argc; ++i) {
         if (is_flag(argv[i])) {
-            handle_flag(argv[i], &args);
+            args = handle_flag(argv[i], args);
         } else {
-            arg_count++;
+            if (args.filename != NULL) {
+                fprintf(
+                    stderr,
+                    "Too many arguments passed, use --help to see the guide\n");
+                exit(2);
+            }
 
             args.filename = argv[i];
         }
     }
 
-    if (arg_count < 1) {
+    if (args.filename == NULL) {
         fprintf(stderr,
                 "Too few arguments passed, use --help to see the guide\n");
-        exit(2);
-    } else if (arg_count > 1) {
-        fprintf(stderr,
-                "Too many arguments passed, use --help to see the guide\n");
         exit(2);
     }
 
