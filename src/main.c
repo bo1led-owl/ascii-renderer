@@ -35,16 +35,8 @@ static void print_help(void) {
 }
 
 static bool is_flag(const char* s) {
-    size_t dash_count = 0;
-    for (char const* c = s; *c != '\0'; ++c) {
-        if (*c == '-') {
-            dash_count += 1;
-        } else {
-            break;
-        }
-    }
-
-    return dash_count > 0;
+    assert(strlen(s) > 0);
+    return s[0] == '-';
 }
 
 static Args handle_flag(const char* s, Args args) {
